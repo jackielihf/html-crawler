@@ -3,7 +3,6 @@ import os
 from bs4 import BeautifulSoup
 import json
 import base64
-from urllib.parse import urljoin
 
 def to_base64(data):
     return base64.b64encode(data.encode('utf-8')).hex()
@@ -28,6 +27,8 @@ def mock_headers():
     } 
 
 def get_http_resource(url):
+    if url.find("msgType_") >= 0:
+        print("hello")
     print("fetching url: " + url)
     resp = requests.get(url, headers=mock_headers())
     if resp.status_code == 200:
@@ -79,42 +80,12 @@ def fetch_and_save_html_file(filename, url):
 def get_local_filename(base_dir, filename):
     return os.path.join(base_dir, filename)        
      
-
-def parse_html_for_urls(html):
-    print("parsing html for urls...")
-    soup = parse_html(html)
-    a_list = soup.find_all('a')
-    filter_a_list = []
-    
-    for item in a_list:
-        # print(item)
-        if 'href' in item.attrs:
-            url = item.attrs['href']
-            if filter_url(url):
-                filter_a_list.append(url)
-                # print(url)
-    return filter_a_list
-    
-        
-
-def filter_url(url):
-    if url is None:
-        return False
-    if len(url) < 2:
-        return False
-    if url.find("html") < 0:
-        return False
-    if url.find("https") >= 0 and url.find("4.2") < 0:
-        return False
-    if url.find("msgs_") < 0 and url.find("fields_") < 0 and url.find("tagNum_") < 0:
-        return False
-    return True
     
 def get_full_url(url):
     if url.find("http") < 0:
         if url.find("/") == 0:
             url = url[1:]
-        return urljoin(BASE_URL, url)
+        return os.path.join(BASE_URL, url)
     return url
 
 def split_url_for_filename(url):
@@ -122,23 +93,56 @@ def split_url_for_filename(url):
     if index >= 0:
         return url[index+1:]
     return url
-        
-def replace_and_save_html_content(filename, html, node_list):
+
+def parse_for_sub_page_urls(soup):
+    a_list = soup.find_all('a')
+    filter_a_list = []
+    for item in a_list:
+        if 'href' in item.attrs:
+            url = item.attrs['href']
+            if filter_url(url):
+                filter_a_list.append(url)
+                # print(url)
+    return filter_a_list
+
+def filter_url(url):
+    if url is None:
+        return False
+    if url.find(".html") < 0:
+        return False
+    if url.find("msgs_") < 0 and url.find("fields_") < 0 and url.find("tagNum_") < 0 and url.find("msgType_") < 0:
+        return False
+    return True
+
+def handle_html(filename, soup, override=False):
+    print("======= handle html =========")
+    # parse for sub pages
+    sub_node_list = []
+    urls = parse_for_sub_page_urls(soup)
+    # print("sub urls: ")
+    for url in urls:
+        newNode = NodeInfo(split_url_for_filename(url), get_full_url(url))
+        sub_node_list.append(newNode)
+        # print(newNode.to_json())
+    
+    # check target html file
     target_filename = get_local_filename(TARGET_DIR, filename)
-    if os.path.exists(target_filename):
+    if exist_local_file(target_filename) and not override:
         print("target filename already exists, ignore: ", target_filename)
-        return
+        return sub_node_list
     # replace urls
-    for node in node_list:
-        local_filename = os.path.join("./", node.filename)
+    html = soup.prettify()
+    for node in sub_node_list:
+        sub_url = os.path.join("./", node.filename)
         if html.find(node.url) >= 0:
-            html = html.replace(node.url, local_filename)
+            html = html.replace(node.url, sub_url)
         else:
-            html = html.replace(node.filename, local_filename)
-    # print(html)
-    save_file(target_filename, html)
+            html = html.replace(node.filename, sub_url)
+    save_file(target_filename, html, override)
+    return sub_node_list
     
 def handle_css(soup):
+    print("======= handle css =========")
     links = soup.find_all('link', rel="stylesheet")
     css_list = []
     for link in links:
@@ -156,10 +160,12 @@ def handle_css(soup):
             save_file(target_filepath, content)   
         # replace
         new_href = os.path.join("./", STATIC_DIR, filename)
+        # new_href = os.path.join(STATIC_DIR, filename)
         link.attrs["href"] = new_href
     return soup
 
 def handle_js(soup):
+    print("======= handle js =========")
     links = soup.find_all('script')
     for link in links:
         if not link.has_attr("src"):
@@ -169,7 +175,7 @@ def handle_js(soup):
         filename = "{}.js".format(to_base64(url))
         if len(filename) > 100:
             filename = filename[-100:]
-        print(filename, url)
+        # print(filename, url)
         
         # fetch and save files
         raw_filepath = os.path.join(RAW_DIR, STATIC_DIR, filename)
@@ -179,7 +185,7 @@ def handle_js(soup):
             save_file(raw_filepath, content)
             save_file(target_filepath, content)   
         # replace
-        new_src = os.path.join("./", STATIC_DIR, filename)
+        new_src = os.path.join(STATIC_DIR, filename)
         link.attrs["src"] = new_src
     return soup
         
@@ -194,39 +200,34 @@ class NodeInfo:
 def traversal_fetch_html(node: NodeInfo, depth=1):
     cur_depth = 1
     node_list = []
-    todo_list = []
-    todo_list.append(node)
+    sub_node_list = []
+    sub_node_list.append(node)
     
     while cur_depth <= depth:
-        node_list = todo_list
-        todo_list = []
-        print("=============> fetch html at depth: ", cur_depth)
+        node_list = sub_node_list
+        sub_node_list = []
+        print("===> process html at depth: ", cur_depth)
         while(len(node_list) > 0):
-            item = node_list.pop()            
+            item = node_list.pop()   
+            print("============handle page ===========")         
+            print("page url=", item.url)
             html = fetch_and_save_html_file(item.filename, item.url)
-            # print(html)
             soup = parse_html(html)
-            soup = handle_css(soup)
+            # soup = handle_css(soup)
             soup = handle_js(soup)
-            # print(soup.prettify())
-            save_file("./temp.html", soup.prettify())
             
-            # parse for sub pages
-            urls = parse_html_for_urls(html)
-            for url in urls:
-                newNode = NodeInfo(split_url_for_filename(url), get_full_url(url))
-                todo_list.append(newNode)
-                print(newNode.to_json())
-            replace_and_save_html_content(item.filename, html, todo_list)
+            # handle current html page
+            sub_nodes = handle_html(item.filename, soup, override=False)
+            sub_node_list.extend(sub_nodes)
         
-        #
+        # move to next level
         cur_depth = cur_depth + 1
     
 
 
-RAW_DIR = "./raw"   # 存放原始文件的目录
-TARGET_DIR = "./target"
-STATIC_DIR = "static"
+RAW_DIR = "./raw"   # 存放原始文件
+TARGET_DIR = "./target" # 存放修改后的html
+STATIC_DIR = "static" # css, js等文件的目录
 BASE_URL = "https://www.onixs.biz/fix-dictionary/4.2"
 
 def main():
@@ -234,11 +235,11 @@ def main():
     index_filename = "index.html"
     node = NodeInfo(index_filename, index_url)
     
-    traversal_fetch_html(node, 1)  
+    traversal_fetch_html(node, depth=3)  
 
+def test():
+    test = True
 
 if __name__ == "__main__":
-    
-    # url = '/hs/hsstatic/jquery-libs/static-1.4/jquery/jquery-1.11.2.js'
-    # print(get_full_url(url))
+    test()
     main()
