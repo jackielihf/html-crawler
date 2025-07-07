@@ -1,0 +1,291 @@
+/*
+    OnixS addons to the SIC styles to display OnixS FIX Dictionary rendering results better.
+ */
+
+/* BEGIN Move upstream */
+/* Reduce size for `code_t` text */
+.code_t {
+    font-size: 75%;
+    margin-bottom: 0px;
+    padding: 3px;
+}
+
+/* Turn `code` (back) into an inline element */
+code {
+    color: #505050;
+    display: inline;
+    font-size: 75%;
+    padding: 3px;
+}
+
+pre {
+    color: #505050;
+    background: #f5f5f5;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    display: block;
+    font-family: monospace;
+    margin-bottom: 0.5rem;
+    padding: 15px;
+}
+
+/* Remove outline */
+.fixd-form input[type="text"] {
+    outline: none;
+}
+
+/* Table captions on top */
+.table caption {
+    caption-side: top;
+    color: #DEA147;
+}
+
+/* Links in table headers */
+.fix-dictionary table.table th a {
+    font-weight: 700;
+    border-bottom: 1px dashed white !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+/* Removed entities in table headers */
+.fix-dictionary table.table th del {
+    font-weight: inherit;
+    color: inherit;
+}
+
+/* Copy from the inline `<style>` of the `https://www.onixs.biz/products.html` page */
+.hs-breadcrumb-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0px 0px 0px 18px;
+}
+
+.hs-breadcrumb-menu-item {
+    float: left;
+    padding: 10px 0px 10px 10px;
+}
+
+.hs-breadcrumb-menu-divider:before {
+    content: 'âº';
+    padding-left: 10px;
+}
+
+/* Fixing `abbr` elements inside a page header */
+.page-header h1 abbr {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Make the `del` element have the same size as a normal text in a header */
+h1 del, h2 del, h3 del, h4 del, h4 del, h5 del, h6 del {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+/* END Move upstream */
+
+
+/* Styling the page navbar */
+.page-nav-links > li::after {
+    background: none !important;
+}
+.scrolled-header .navbar-nav > .nav-item {
+    padding: 0;
+    margin: 0;
+}
+.rich-text-module ul:not(.bullet-doc):not(.no-bullets) > li.nav-item {
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+}
+.navbar-nav > .nav-item > a.nav-link {
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: #0A1C53;
+}
+.navbar-nav .nav-item a.dropdown-item.active,
+.navbar-nav > .nav-item > a.nav-link.active {
+    color: #505050 !important;
+    background-color: transparent !important;
+}
+.navbar-nav > .nav-item > a.nav-link:hover {
+    background: transparent;
+    color: #DEA147;
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+.navbar .navbar-nav .nav-item .dropdown-menu.show a.dropdown-item {
+    border: none;
+}
+.navbar .navbar-nav .nav-item .dropdown-menu.show a.dropdown-item:active {
+    background-color: #eee !important;
+}
+@media (max-width: 991.98px) {
+    .navbar .navbar-nav .nav-item .dropdown-menu.show {
+        border: none;
+    }
+}
+.navbar-nav > .dropdown > .nav-link {
+    display: inline;
+}
+.navbar-nav > .dropdown > .dropdown-toggle-split {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.navbar .form-inline input {
+    margin-bottom: 0;
+    padding-left: 2.5rem;
+    background: #f5f5f5 url('../images/interface/img-icon-search-reversed.svg') no-repeat;
+    background-position: 10px 10px;
+    background-size: 20px;
+    height: 40px !important;
+    width: 400px !important;
+}
+.navbar .form-inline input:hover {
+    background: #f5f5f5 url('../images/interface/img-icon-search-reversed-hover.svg') no-repeat;
+    background-position: 10px 10px;
+    background-size: 20px;
+}
+@media (max-width: 991.98px) {
+    .navbar .form-inline input {
+        width: 100% !important;
+    }
+}
+
+/* Style unnumbered lists in `types` table */
+ul.no-bullets li {
+    margin: 1rem 0 0 1rem;
+}
+ul.no-bullets li::after {
+    background: none !important;
+    cursor: text;
+}
+
+/* Style enumaration items group title */
+li.enum-group {
+    font-size: 1.1em;
+    font-weight: 400;
+}
+li.enum-group::after {
+    background: none !important;
+}
+
+/* Some `enum` item descriptions may have Roman style ordered lists */
+ol.roman {
+    list-style-type: lower-roman;
+}
+ol.roman li {
+    padding-left: 0;
+    margin-left: 1rem;
+}
+ol.roman li::before {
+    content: '';
+}
+
+/* Drop orange square bullets from categorized messages list */
+ul.category-list li::after {
+    background: none !important;
+}
+/* Add margin for `h5` titles in the messages by category list */
+ul.category-list li:not(:first-child) h5 {
+    margin-top: 1em;
+}
+
+/* Restyling jQuery tablesort plugin */
+.tablesorter-header {
+    background-color: #5c73ab
+}
+
+.tablesorter-bootstrap thead .tablesorter-headerUnSorted:not(.sorter-false),
+.tablesorter-bootstrap thead .tablesorter-headerAsc,
+.tablesorter-bootstrap thead .tablesorter-headerDesc {
+    background-image: none;
+}
+
+.tablesorter-bootstrap:not(.table-dark) thead:not(.thead-dark) .tablesorter-header {
+    background-color: #5c73ab;
+}
+
+.tablesorter-header-inner {
+    color: white;
+    font-weight: 700;
+    padding: 4px !important;
+}
+
+.sort-marker {
+    color: white;
+    font-weight: 700;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    float:right;
+}
+
+.tablesorter-headerUnSorted .sort-marker::after {
+    content: "\21f5";
+}
+.tablesorter-headerDesc .sort-marker::after {
+    content: "\2193";
+}
+.tablesorter-headerAsc .sort-marker::after {
+    content: "\2191";
+}
+
+/* Display _Used In_ list in 3 columns */
+h3#UsedIn + ul {
+    columns: 3;
+}
+
+@media (max-width: 767.98px) {
+    /* Display _Used In_ list in 2 columns on medium devices */
+    h3#UsedIn + ul {
+        columns: 2;
+    }
+}
+
+@media (max-width:  575.98px) {
+    /* Display _Used In_ list in 1 column on small devices */
+    h3#UsedIn + ul {
+        columns: 1;
+    }
+}
+
+/* Panels */
+.admonition {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+    background-color: #f3f0ef;
+    box-shadow: 3px 3px 5px grey;
+}
+
+p.admonition-title {
+    color: white;
+    font-weight: bold;
+    padding-left: 0.3rem;
+    border-top-left-radius: 5px;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.danger p.admonition-title,
+.error p.admonition-title {
+    background-image: linear-gradient(to right, #f49525, #f3f0ef);
+}
+.attention p.admonition-title,
+.caution p.admonition-title,
+.warning p.admonition-title {
+    background-image: linear-gradient(to right, #dea147, #f3f0ef);
+}
+.hint p.admonition-title,
+.tip p.admonition-title {
+    background-image: linear-gradient(to right, #cdecf5, #f3f0ef);
+    color: #060f2a;
+}
+.note p.admonition-title {
+    background-image: linear-gradient(to right, #060f2a, #f3f0ef);
+}
