@@ -3,6 +3,7 @@ import os
 from bs4 import BeautifulSoup
 import json
 import base64
+import re
 
 def to_base64(data):
     return base64.b64encode(data.encode('utf-8')).hex()
@@ -53,13 +54,16 @@ def save_file(filepath, text, override=False):
         f = open(filepath, "w", encoding="utf-8")
         f.write(text)
         f.close()
+        
+def read_file(filepath):
+    f = open(filepath, "r", encoding="utf-8")
+    cont = f.read()
+    return cont
     
 def fetch_or_read_local(filepath, url):
     if os.path.exists(filepath):
         print("read file from local: ", filepath)
-        f = open(filepath, "r", encoding="utf-8")
-        cont = f.read()
-        return cont
+        return read_file(filepath)
     else:
         cont = get_http_resource(url)
         return cont
@@ -140,28 +144,66 @@ def handle_html(filename, soup, override=False):
             html = html.replace(node.filename, sub_url)
     save_file(target_filename, html, override)
     return sub_node_list
+
+def fetch_and_save_static_resource(filename, url, override=False):
+    raw_filepath = os.path.join(RAW_DIR, STATIC_DIR, filename)
+    target_filepath = os.path.join(TARGET_DIR, STATIC_DIR, filename)
+    if not exist_local_file(raw_filepath) or override:
+        content = get_http_resource(url)
+        save_file(raw_filepath, content)
+        save_file(target_filepath, content)
+        return content
+    else:
+        return read_file(raw_filepath)   
     
+def parse_css_for_import_urls(css):
+    urls = []
+    pattern = re.compile(r'\(\'(.*?)\'\)')
+    if css is not None and css.find('@import') >= 0:
+        matchs = pattern.findall(css)
+        for item in matchs:
+            if not item.startswith("https:"):
+                item = "https:" + item
+            urls.append(item)
+    return urls
+
 def handle_css(soup):
     print("======= handle css =========")
     links = soup.find_all('link', rel="stylesheet")
     css_list = []
+    import_links = []
     for link in links:
         url = link.attrs["href"]
         filename = split_url_for_filename(url)
-        print(filename, url)
         css_list.append(NodeInfo(filename, url))
         
+        # replace href
+        new_href = os.path.join(STATIC_DIR, filename)
+        link["href"] = new_href
+        if link.has_attr("integrity"):
+            del link["integrity"]
+        if link.has_attr("crossorigin"):
+            del link["crossorigin"]
+        
         # fetch and save files
-        raw_filepath = os.path.join(RAW_DIR, STATIC_DIR, filename)
-        target_filepath = os.path.join(TARGET_DIR, STATIC_DIR, filename)
-        if not exist_local_file(raw_filepath):
-            content = get_http_resource(url)
-            save_file(raw_filepath, content)
-            save_file(target_filepath, content)   
-        # replace
-        new_href = os.path.join("./", STATIC_DIR, filename)
-        # new_href = os.path.join(STATIC_DIR, filename)
-        link.attrs["href"] = new_href
+        content = fetch_and_save_static_resource(filename, url, override=False) 
+        # process css content
+        import_urls = parse_css_for_import_urls(content)
+        if len(import_urls) > 0:
+            for import_url in import_urls:
+                import_filename = split_url_for_filename(import_url)
+                # fetch
+                fetch_and_save_static_resource(import_filename, import_url)
+                # add new link  
+                href = os.path.join(STATIC_DIR, import_filename)              
+                new_link = soup.new_tag('link', attrs={
+                    "href": href,
+                    "rel": "stylesheet"
+                })
+                import_links.append(new_link)
+    if len(import_links) > 0:
+        for link in import_links:
+            soup.header.append(link)
     return soup
 
 def handle_js(soup):
@@ -178,17 +220,38 @@ def handle_js(soup):
         # print(filename, url)
         
         # fetch and save files
-        raw_filepath = os.path.join(RAW_DIR, STATIC_DIR, filename)
-        target_filepath = os.path.join(TARGET_DIR, STATIC_DIR, filename)
-        if not exist_local_file(raw_filepath):
-            content = get_http_resource(url)
-            save_file(raw_filepath, content)
-            save_file(target_filepath, content)   
+        fetch_and_save_static_resource(filename, url) 
+        
         # replace
         new_src = os.path.join(STATIC_DIR, filename)
         link.attrs["src"] = new_src
     return soup
         
+def handle_img(soup):
+    #
+    img_list = soup.find_all('img')
+    for item in img_list:
+        item.decompose()
+    #
+    link_list = soup.find_all('link')
+    for item in link_list:
+        if not item.has_attr('href'):
+            continue
+        href = item.attrs['href']
+        if href and href.find('.png') >= 0:
+            item.decompose()
+    #
+    meta_list = soup.find_all('meta')
+    for item in meta_list:
+        if not item.has_attr("content"):
+            continue
+        url = item.attrs['content']
+        if url and url.find('.png') >= 0:
+            item.decompose()
+    return soup
+
+def handle_other(soup):
+    return soup
 
 class NodeInfo:
     def __init__(self, filename, url):
@@ -213,11 +276,13 @@ def traversal_fetch_html(node: NodeInfo, depth=1):
             print("page url=", item.url)
             html = fetch_and_save_html_file(item.filename, item.url)
             soup = parse_html(html)
-            # soup = handle_css(soup)
+            soup = handle_css(soup)
             soup = handle_js(soup)
+            soup = handle_img(soup)
+            soup = handle_other(soup)
             
             # handle current html page
-            sub_nodes = handle_html(item.filename, soup, override=False)
+            sub_nodes = handle_html(item.filename, soup, override=True)
             sub_node_list.extend(sub_nodes)
         
         # move to next level
