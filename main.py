@@ -114,9 +114,21 @@ def filter_url(url):
         return False
     if url.find(".html") < 0:
         return False
-    if url.find("msgs_") < 0 and url.find("fields_") < 0 and url.find("tagNum_") < 0 and url.find("msgType_") < 0:
-        return False
-    return True
+    if url.find("msgs_") >= 0:         
+        return True
+    if url.find("fields_") >= 0:         
+        return True
+    if url.find("tagNum_") >= 0:         
+        return True
+    if url.find("msgType_") >= 0:         
+        return True
+    if url.find("app_") >= 0:         
+        return True
+    if url.find("glossary") >= 0:         
+        return True
+    if url.find("compBlock") >= 0:         
+        return True
+    return False
 
 def handle_html(filename, soup, override=False):
     print("======= handle html =========")
@@ -201,9 +213,11 @@ def handle_css(soup):
                     "rel": "stylesheet"
                 })
                 import_links.append(new_link)
+            # remove css if it has import urls
+            link.decompose()
     if len(import_links) > 0:
-        for link in import_links:
-            soup.header.append(link)
+        for item in import_links:
+            soup.header.append(item)
     return soup
 
 def handle_js(soup):

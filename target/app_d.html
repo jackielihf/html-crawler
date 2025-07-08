@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="Appendix D: Order State Change Matrices – FIX 4.2 – FIX Dictionary – Onix Solutions" name="description"/>
+  <title>
+   Appendix D: Order State Change Matrices – FIX 4.2 – FIX Dictionary – Onix Solutions
+  </title>
+  <!-- Favicons and touch icons -->
+  <meta content="#ffffff" name="msapplication-TileColor"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Appendix D: Order State Change Matrices – FIX 4.2 – FIX Dictionary – Onix Solutions" property="og:description"/>
+  <meta content="Appendix D: Order State Change Matrices – FIX 4.2 – FIX Dictionary – Onix Solutions" property="og:title"/>
+  <meta content="Appendix D: Order State Change Matrices – FIX 4.2 – FIX Dictionary – Onix Solutions" name="twitter:description"/>
+  <meta content="Appendix D: Order State Change Matrices – FIX 4.2 – FIX Dictionary – Onix Solutions" name="twitter:title"/>
+  <style>
+   a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-box !important;box-sizing:content-box !important;vertical-align:middle}.hs-breadcrumb-menu{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px}.hs-breadcrumb-menu-item{float:left;padding:10px 0px 10px 10px}.hs-breadcrumb-menu-divider:before{content:'›';padding-left:10px}.hs-featured-image-link{border:0}.hs-featured-image{float:right;margin:0 0 20px 20px;max-width:50%}@media (max-width: 568px){.hs-featured-image{float:none;margin:0;width:100%;max-width:100%}}.hs-screen-reader-text{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px}
+  </style>
+  <link href="static/module_Header.min.css" rel="stylesheet"/>
+  <link href="static/module_Footer.min.css" rel="stylesheet"/>
+  <link href="static/module_Offcanvas_Navigation.min.css" rel="stylesheet"/>
+  <link href="static/module_Search_-_Full-Screen.min.css" rel="stylesheet"/>
+  <!--  Added by GoogleTagManager integration -->
+  <script>
+   var _hsp = window._hsp = window._hsp || [];
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
+var useGoogleConsentModeV2 = true;
+var waitForUpdateMillis = 1000;
+
+
+
+var hsLoadGtm = function loadGtm() {
+    if(window._hsGtmLoadOnce) {
+      return;
+    }
+
+    if (useGoogleConsentModeV2) {
+
+      gtag('set','developer_id.dZTQ1Zm',true);
+
+      gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': waitForUpdateMillis
+      });
+
+      _hsp.push(['useGoogleConsentModeV2'])
+    }
+
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K6HSTSD');
+
+    window._hsGtmLoadOnce = true;
+};
+
+_hsp.push(['addPrivacyConsentListener', function(consent){
+  if(consent.allowed || (consent.categories && consent.categories.analytics)){
+    hsLoadGtm();
+  }
+}]);
+  </script>
+  <!-- /Added by GoogleTagManager integration -->
+  <link href="https://www.onixs.biz/fix-dictionary/4.2/app_d.html" rel="canonical"/>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="" src="static/e625746755957646c6369356a623230765a3352685a793971637a39705a443156515330334f5463334d7a63324c54453d.js">
+  </script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  
+  // analytics
+  gtag('config', 'UA-7977376-1');
+  </script>
+  <meta content="https://www.onixs.biz/fix-dictionary/4.2/app_d.html" property="og:url"/>
+  <meta content="summary" name="twitter:card"/>
+  <!-- Bootstrap v4.3.1 CSS -->
+  <link href="static/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <!-- RSS feed -->
+  <link href="http://www.rssmix.com/u/11685744/rss.xml" rel="alternative" title="Subscribe to the OnixS RSS feed" type="application/rss+xml"/>
+  <meta content="HubSpot" name="generator"/>
+ </head>
+ <body>
+  <!--  Added by GoogleTagManager integration -->
+  <noscript>
+   <iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-K6HSTSD" style="display:none;visibility:hidden" width="0">
+   </iframe>
+  </noscript>
+  <!-- /Added by GoogleTagManager integration -->
+  <div class="row-offcanvas row-offcanvas-right">
+   <div class="canvas">
+    <a class="page-mask" href="#" title="Close navigation">
+    </a>
+    <div class="wrapper">
+     <!-- Header -->
+     <header class="header-container fixed-top clearfix">
+      <!-- Header -->
+      <div class="container">
+       <div class="row">
+        <div class="col-6 col-md-3 col-lg-4 align-self-center">
+         <!-- Branding and homepage link -->
+         <a class="navbar-brand d-block" href="https://www.onixs.biz/" title="OnixS - homepage">
+          <span class="text-hide">
+           OnixS
+          </span>
+         </a>
+        </div>
+        <div class="col-6 col-md-9 col-lg-8 d-flex align-self-center justify-content-end text-right">
+         <nav class="col-12 text-right align-self-end">
+          <!-- Navigation -->
+          <div aria-label="Navigation Menu" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" data-menu-id="25865391656" data-sitemap-name="default" id="hs_menu_wrapper_module_157970816417593_" role="navigation">
+           <ul role="menu">
+            <li class="hs-menu-item hs-menu-depth-1" role="none">
+             <a href="https://www.onixs.biz/products.html" role="menuitem">
+              Products
+             </a>
+            </li>
+            <li class="hs-menu-item hs-menu-depth-1" role="none">
+             <a href="https://www.onixs.biz/support.html" role="menuitem">
+              Support
+             </a>
+            </li>
+            <li class="hs-menu-item hs-menu-depth-1" role="none">
+             <a href="https://www.onixs.biz/contact-us" role="menuitem">
+              Contact us
+             </a>
+            </li>
+           </ul>
+          </div>
+          <!--  Cart -->
+          <div class="header_cart_sec" style="display:none;">
+           <a href="https://www.onixs.biz/download-selections.html">
+            <svg fill="none" height="15" viewbox="0 0 15 15" width="15" xmlns="http://www.w3.org/2000/svg">
+             <path clip-rule="evenodd" d="M1.86714 10.2688V11.2957C1.30703 11.4824 0.933618 11.9491 0.933618 12.6026C0.933618 13.3494 1.58709 14.0029 2.33391 14.0029C3.08073 14.0029 3.7342 13.3494 3.7342 12.6026V11.2023H10.7357C9.98883 11.2023 9.33536 11.8558 9.33536 12.6026C9.33536 13.3494 9.98883 14.0029 10.7357 14.0029C11.4825 14.0029 12.1359 13.3494 12.1359 12.6026V11.2023L10.9224 8.77515L12.8828 0.933527H14.9365V0H12.1359L11.4825 2.80058H9.05991e-05L1.49373 8.40174L10.0822 9.24192L10.6423 10.2688H1.86714ZM1.21368 3.73411H11.2024L10.0822 8.30839L2.24056 7.46822L1.21368 3.73411Z" fill="white" fill-rule="evenodd">
+             </path>
+            </svg>
+            <span id="cartsize">
+            </span>
+           </a>
+          </div>
+          <!-- Search -->
+          <button aria-label="Show search" class="search-trigger d-inline-block">
+           <span class="text-hide">
+            Search
+           </span>
+          </button>
+          <!-- Offcanvas Menu trigger -->
+          <button class="navbar-toggler navbar-toggler-header d-inline-block" data-canvas="body" data-target="#myNavmenu" data-toggle="offcanvas" type="button">
+           <span class="sr-only">
+            Menu
+           </span>
+           <span class="icon-bar">
+           </span>
+           <span class="icon-bar">
+           </span>
+           <span class="icon-bar">
+           </span>
+          </button>
+         </nav>
+        </div>
+       </div>
+      </div>
+      <link href="static/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+      <link href="static/typography.min.css" rel="stylesheet"/>
+      <link href="static/colours.min.css" rel="stylesheet"/>
+      <link href="static/helpers.min.css" rel="stylesheet"/>
+      <link href="static/buttons.min.css" rel="stylesheet"/>
+      <link href="static/forms.min.css" rel="stylesheet"/>
+      <link href="static/global.min.css" rel="stylesheet"/>
+      <link href="static/components.min.css" rel="stylesheet"/>
+     </header>
+     <div class="content">
+      <!-- Page header -->
+      <section class="page-header page-header-short page-header-background notch-bottom-inset-white">
+       <div class="container">
+        <div class="row justify-content-start align-items-center">
+         <div class="col-12 col-md-10 col-lg-9 ml-auto mr-auto text-center">
+          <h1>
+           <span class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text" id="hs_cos_wrapper_h1_heading" style="">
+            Appendix D: Order State Change Matrices – FIX 4.2 – FIX Dictionary
+           </span>
+          </h1>
+         </div>
+        </div>
+       </div>
+      </section>
+      <section class="rich-text-module fix-dictionary">
+       <div class="container">
+        <div class="row">
+         <div class="col-12">
+          <table border="0" cellpadding="0" cellspacing="0" height="100%" style="height: 100%;" width="100%">
+           <tbody>
+            <tr>
+             <td height="100%" style="height: 100%;" valign="top">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+               <tbody>
+                <tr>
+                 <td align="right" class="listLinks">
+                  <a href="./msgs_by_msg_type.html">
+                   Messages by MsgType
+                  </a>
+                  |
+                  <a href="./msgs_by_name.html">
+                   Messages by Name
+                  </a>
+                  |
+                  <a href="./fields_by_tag.html">
+                   Fields by Tag
+                  </a>
+                  |
+                  <a href="./fields_by_name.html">
+                   Fields by Name
+                  </a>
+                  |
+                  <a href="index.html">
+                   FIX 4.2
+                  </a>
+                  |
+                  <a href="//www.onixs.biz/fix-dictionary.html">
+                   Home
+                  </a>
+                 </td>
+                </tr>
+                <tr>
+                 <td valign="top">
+                  <table border="0" cellpadding="2" cellspacing="0" width="100%">
+                   <tbody>
+                    <tr>
+                     <td valign="top">
+                      <h2>
+                       Appendix D
+                      </h2>
+                      <h3>
+                       Order State Change Matrices
+                      </h3>
+                     </td>
+                    </tr>
+                   </tbody>
+                  </table>
+                 </td>
+                </tr>
+               </tbody>
+              </table>
+              <br/>
+              <table align="center" border="0" cellpadding="0" cellspacing="1" class="fixTableBorder">
+               <tbody>
+                <tr>
+                 <td class="white">
+                  <table border="0" cellpadding="1" cellspacing="1" class="white">
+                   <tbody>
+                    <tr>
+                     <th>
+                      Ref
+                     </th>
+                     <th>
+                      Group
+                     </th>
+                     <th>
+                      Description
+                     </th>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d1.html">
+                       D1
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Vanilla
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d1.html">
+                       Filled order
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d2.html">
+                       D2
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Vanilla
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d2.html">
+                       Part-filled day order, done for day
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d3.html">
+                       D3
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Cancel
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d3.html">
+                       Cancel request issued for a zero-filled order
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d4.html">
+                       D4
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Cancel
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d4.html">
+                       Cancel request issued for a part-filled order — executions occur whilst cancel request is active
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d5.html">
+                       D5
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Cancel
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d5.html">
+                       Cancel request issued for an order that becomes filled before cancel request can be accepted
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d6.html">
+                       D6
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace to increase qty
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d6.html">
+                       Zero-filled order, cancel/replace request issued to increase order qty
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d7.html">
+                       D7
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace to increase qty
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d7.html">
+                       Part-filled order, followed by cancel/replace request to increase order qty, execution occurs whilst order is pending replace
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d8.html">
+                       D8
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace to increase qty
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d8.html">
+                       Filled-order followed by cancel/replace request to increase order quantity
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d9.html">
+                       D9
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace not for qty change
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d9.html">
+                       Cancel/replace request (not for quantity change) is rejected as a fill has occurred
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d10.html">
+                       D10
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace to decrease qty
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d10.html">
+                       Cancel/replace request sent whilst execution is being reported — the requested order qty exceeds the cum qty. Order is replaced then filled
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d11.html">
+                       D11
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace to decrease qty
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d11.html">
+                       Cancel/replace request sent whilst execution is being reported — the requested order qty equals the cum qty — order qty is amended to cum qty
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d12.html">
+                       D12
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace to decrease qty
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d12.html">
+                       Cancel/replace request sent whilst execution is being reported — the requested order qty is below cum qty — order qty is amended to cum qty
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d13.html">
+                       D13
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace – sequence
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d13.html">
+                       One cancel/replace request is issued which is accepted — another one is issued which is also accepted
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d14.html">
+                       D14
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace – sequence
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d14.html">
+                       One cancel/replace request is issued which is rejected before order becomes pending replace — then another one is issued which is accepted
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d15.html">
+                       D15
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace – sequence
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d15.html">
+                       One cancel/replace request is issued which is rejected after it is in pending replace — then another one is issued which is accepted
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d16.html">
+                       D16
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace – chaining
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d16.html">
+                       One cancel/replace request is issued followed immediately by another — broker processes sequentially
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d17.html">
+                       D17
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Replace – chaining
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d17.html">
+                       One cancel/replace request is issued followed immediately by another — broker rejects the second as order is pending replace
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d18.html">
+                       D18
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Unsolicited reports
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d18.html">
+                       Telephoned order
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d19.html">
+                       D19
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Unsolicited reports
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d19.html">
+                       Unsolicited cancellation of a part-filled order
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d20.html">
+                       D20
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Unsolicited reports
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d20.html">
+                       Unsolicited replacement of a part-filled order
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d21.html">
+                       D21
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Unsolicited reports
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d21.html">
+                       Unsolicited reduction of order quantity by sell side
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d22.html">
+                       D22
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Order reject
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d22.html">
+                       Order rejected due to duplicate ClOrdID
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d23.html">
+                       D23
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Order reject
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d23.html">
+                       Order rejected because the order has already been verbally submitted
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d24.html">
+                       D24
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Status
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d24.html">
+                       Order status request rejected for unknown order
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d25.html">
+                       D25
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Status
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d25.html">
+                       Status request followed by "Nothing done"
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d26.html">
+                       D26
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Status
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d26.html">
+                       Order sent, immediately followed by a status request. Subsequent status requests sent
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d27.html">
+                       D27
+                      </a>
+                     </td>
+                     <td valign="top">
+                      GT
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d27.html">
+                       GTC order partially filled, restated (renewed) and partially filled the following day
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d28.html">
+                       D28
+                      </a>
+                     </td>
+                     <td valign="top">
+                      GT
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d28.html">
+                       GTC order with partial fill, a 2:1 stock split then a partial fill and fill the following day
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d29.html">
+                       D29
+                      </a>
+                     </td>
+                     <td valign="top">
+                      GT
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d29.html">
+                       GTC order partially filled, restated (renewed) and canceled the following day
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d30.html">
+                       D30
+                      </a>
+                     </td>
+                     <td valign="top">
+                      GT
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d30.html">
+                       GTC order partially filled, restated (renewed) followed by replace request to increase quantity
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d31.html">
+                       D31
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Resend
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d31.html">
+                       Poss resend
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d32.html">
+                       D32
+                      </a>
+                     </td>
+                     <td valign="top">
+                      TIF
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d32.html">
+                       Fill or kill order that cannot be filled
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d33.html">
+                       D33
+                      </a>
+                     </td>
+                     <td valign="top">
+                      TIF
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d33.html">
+                       Immediate or Cancel order that cannot be immediately hit
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d34.html">
+                       D34
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Execution correct/cancel
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d34.html">
+                       Filled order, followed by correction and cancellation of executions
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d35.html">
+                       D35
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Execution correct/cancel
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d35.html">
+                       A cancel of a partially filled order followed by an execution cancel(bust) and new execution
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <a href="././app_d36.html">
+                       D36
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Execution correct/cancel
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d36.html">
+                       GTC order partially filled, restated (renewed) and partially filled the following day, with corrections of quantity on both executions
+                      </a>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <a href="././app_d37.html">
+                       D37
+                      </a>
+                     </td>
+                     <td valign="top">
+                      Stopped/Guarantee
+                     </td>
+                     <td valign="top">
+                      <a href="././app_d37.html">
+                       A stopped (execution price guarantee) report followed by execution
+                      </a>
+                     </td>
+                    </tr>
+                   </tbody>
+                  </table>
+                 </td>
+                </tr>
+               </tbody>
+              </table>
+              <p>
+              </p>
+              <p>
+               The Table below shows which state transitions have been illustrated by the matrices in this Appendix (marked with an asterisk). The row represents the current value of OrdStatus and the column represents the next value as reported back to the buy-side via an execution report or order cancel reject message. Next to each OrdStatus value is its precedence – this is used when the order exists in a number of states simultaneously to determine the value that should be reported back. Note that absence of a scenario should not necessarily be interpreted as meaning that the state transition is not allowed:
+              </p>
+              <table align="center" border="0" cellpadding="0" cellspacing="1" class="fixTableBorder" id="star" width="100%">
+               <tbody>
+                <tr>
+                 <td class="white">
+                  <table border="0" cellpadding="1" cellspacing="1" class="white" width="100%">
+                   <tbody>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <p>
+                       <strong>
+                        OrdStatus
+                        <br/>
+                        (precedence value)
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       New (2)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Partially
+                       <br/>
+                       Filled (4)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Filled (8)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Done
+                       <br/>
+                       For
+                       <br/>
+                       Day (10)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Pending Cancel (12)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Pending
+                       <br/>
+                       Replace (11)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Replaced  (3)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Canceled (5)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Rejected (2)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       Stopped (7)
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <p>
+                       Pending    New (2)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <p>
+                       New    (2)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <p>
+                       Partially    Filled (4)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <p>
+                       Filled    (8)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <p>
+                       Done    for Day (10)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <p>
+                       Pending    Cancel (12)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <p>
+                       Pending    Replace (11)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <p>
+                       Replaced    (3)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <p>
+                       Canceled    (5)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr1">
+                     <td valign="top">
+                      <p>
+                       Rejected    (2)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                    <tr class="tr2">
+                     <td valign="top">
+                      <p>
+                       Stopped    (7)
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                        *
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                     <td valign="top">
+                      <p align="center">
+                       <strong>
+                       </strong>
+                      </p>
+                     </td>
+                    </tr>
+                   </tbody>
+                  </table>
+                 </td>
+                </tr>
+               </tbody>
+              </table>
+              <p>
+               How to read the Order State Change Matrices:
+              </p>
+              <ul>
+               <li>
+                The "Execution Report" message is referred to simply as "Execution"
+               </li>
+               <li>
+                The "Order Cancel/Replace Request" and "Order Cancel Request" messages are referred to as "Replace Request" and "Cancel Request" respectively
+               </li>
+               <li>
+                The shaded rows represent messages sent from buy-side to the sell-side
+               </li>
+               <li>
+                In general where two lines of a matrix share the same time, this means either
+                <ul>
+                 <li>
+                  that  there are two possible paths (e.g. a request is accepted or rejected) —  in this case the first row of the two possible paths is the reject case  which is italicized. The non-italicized row is the path that is continued  by the remainder of the matrix
+                 </li>
+                 <li>
+                  that  two messages are being sent at the same time but in different directions  such that the messages cross on the connection (e.g. a cancel request is  sent at the same time as the sell-side is sending an execution) — in this  case both lines have bold text
+                 </li>
+                </ul>
+               </li>
+               <li>
+                For scenarios involving cancel requests or cancel/replace requests "X" refers to the original order, "Y" refers to the cancel/replacing order. A similar convention is used for corrections or cancels to executions
+               </li>
+              </ul>
+              <p>
+              </p>
+             </td>
+            </tr>
+            <tr>
+             <td valign="top">
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </section>
+      <div class="footer-push">
+      </div>
+     </div>
+     <!-- /.content -->
+     <!-- Social links -->
+     <ul class="d-none d-sm-block social-icons social-icons--vertical bg-primary">
+      <li>
+       Follow
+       <br/>
+       OnixS
+      </li>
+      <li>
+       <a class="twitter-link" href="https://twitter.com/onixsbiz" rel="noopener" target="_blank" title="Follow us on Twitter">
+        <span class="sr-only">
+         Follow us on Twitter
+        </span>
+       </a>
+      </li>
+      <li>
+       <a class="linkedin-link" href="https://www.linkedin.com/company/onix-solutions/" rel="noopener" target="_blank" title="Connect with us on LinkedIn">
+        <span class="sr-only">
+         Connect with us on LinkedIn
+        </span>
+       </a>
+      </li>
+      <!--<li>
+
+              <a href="http://rssmixer.com/feed/onixs.xml" title="Subscribe to our RSS feed" rel="noopener" target="_blank" class="rss-link">
+                <span class="sr-only">Subscribe to our RSS feed</span>
+              </a>
+
+            </li>-->
+     </ul>
+     <!-- Footer -->
+     <footer class="footer bg-primary">
+      <div class="container pt-3 pb-3">
+       <div class="row pt-5 mb-5">
+        <div class="col-5">
+         <a class="footer-brand" href="https://www.onixs.biz/" title="OnixS - homepage">
+          <span class="text-hide">
+           OnixS
+          </span>
+         </a>
+        </div>
+        <div class="col-7 text-right">
+         <ul class="social-icons">
+          <li>
+           <a class="twitter-link" href="https://twitter.com/onixsbiz" rel="nojsener" target="_blank" title="Follow us on Twitter">
+            <span class="sr-only">
+             Follow us on Twitter
+            </span>
+           </a>
+          </li>
+          <li>
+           <a class="linkedin-link" href="https://www.linkedin.com/company/onix-solutions/" rel="noopener" target="_blank" title="Connect with us on LinkedIn">
+            <span class="sr-only">
+             Connect with us on LinkedIn
+            </span>
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+       <div class="row footer_navigation" role="navigation">
+        <div class="col-12 col-md-12 col-lg-5 col-xl-6">
+         <div class="row h-100">
+          <div class="col-12 col-lg-6">
+           <div class="row">
+            <div class="col-6 col-lg-12 mb-4">
+             <h6>
+              Telephone UK
+             </h6>
+             <a href="tel:+44-20-7117-0111" rel="noopener" target="_blank" title="Call us on +44 20 7117 0111">
+              +44 20 7117 0111
+             </a>
+            </div>
+            <div class="col-6 col-lg-12 mb-4">
+             <h6>
+              Telephone US
+             </h6>
+             <a href="tel:+1-312-999-6040" rel="noopener" target="_blank" title="Call us on +1 312 999 6040">
+              +1 312 999 6040
+             </a>
+            </div>
+           </div>
+          </div>
+          <div class="col-12 col-lg-6">
+           <div class="row">
+            <div class="col-6 col-lg-12 mb-4">
+             <h6>
+              Sales Support
+             </h6>
+             <a href="mailto:sales@onixs.biz" rel="noopener" target="_blank" title="Email us at sales@onixs.biz">
+              sales@onixs.biz
+             </a>
+            </div>
+            <div class="col-6 col-lg-12 mb-4">
+             <h6>
+              Technical Support
+             </h6>
+             <a href="mailto:support@onixs.biz" rel="noopener" target="_blank" title="Email us at support@onixs.biz">
+              support@onixs.biz
+             </a>
+            </div>
+            <div class="col-6 col-lg-12 mb-4">
+             <a class="btn-small-chevron" href="https://www.onixs.biz/support.html" title="Support">
+              Support
+             </a>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-7 col-xl-6 mb-lg-4">
+         <div class="row">
+          <div class="col d-none d-lg-inline-block">
+           <div class="footer-menu-wrapper">
+            <div aria-label="Navigation Menu" class="hs-menu-wrapper active-branch no-flyouts hs-menu-flow-vertical" data-menu-id="25819283727" data-sitemap-name="default" id="hs_menu_wrapper_module_157970814481491_" role="navigation">
+             <ul role="menu">
+              <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none">
+               <a aria-expanded="false" aria-haspopup="true" href="https://www.onixs.biz/products.html" role="menuitem">
+                Products
+               </a>
+               <ul class="hs-menu-children-wrapper" role="menu">
+                <li class="hs-menu-item hs-menu-depth-2" role="none">
+                 <a href="https://www.onixs.biz/directconnect.html" role="menuitem">
+                  OnixS directConnect
+                 </a>
+                </li>
+                <li class="hs-menu-item hs-menu-depth-2" role="none">
+                 <a href="https://www.onixs.biz/fix-engine.html" role="menuitem">
+                  FIX Engine
+                 </a>
+                </li>
+                <li class="hs-menu-item hs-menu-depth-2" role="none">
+                 <a href="https://www.onixs.biz/fix-protocol-dictionary-tools.html" role="menuitem">
+                  FIX Protocol Tools
+                 </a>
+                </li>
+               </ul>
+              </li>
+             </ul>
+            </div>
+           </div>
+          </div>
+          <div class="col d-none d-lg-inline-block">
+           <div class="footer-menu-wrapper">
+            <div aria-label="Navigation Menu" class="hs-menu-wrapper active-branch no-flyouts hs-menu-flow-vertical" data-menu-id="25819283742" data-sitemap-name="default" id="hs_menu_wrapper_module_157970814481491_" role="navigation">
+             <ul role="menu">
+              <li class="hs-menu-item hs-menu-depth-1" role="none">
+               <a href="https://www.onixs.biz/about.html" role="menuitem">
+                About OnixS
+               </a>
+              </li>
+              <li class="hs-menu-item hs-menu-depth-1" role="none">
+               <a href="https://www.onixs.biz/insights" role="menuitem">
+                Insights
+               </a>
+              </li>
+              <li class="hs-menu-item hs-menu-depth-1" role="none">
+               <a href="https://www.onixs.biz/contact-us" role="menuitem">
+                Contact us
+               </a>
+              </li>
+             </ul>
+            </div>
+           </div>
+          </div>
+          <div class="col d-none d-lg-inline-block">
+           <div class="footer-menu-wrapper">
+            <div aria-label="Navigation Menu" class="hs-menu-wrapper active-branch no-flyouts hs-menu-flow-vertical" data-menu-id="25819353273" data-sitemap-name="default" id="hs_menu_wrapper_module_157970814481491_" role="navigation">
+             <ul role="menu">
+              <li class="hs-menu-item hs-menu-depth-1" role="none">
+               <a href="https://www.onixs.biz/cookies-and-privacy.html" role="menuitem">
+                Privacy
+               </a>
+              </li>
+              <li class="hs-menu-item hs-menu-depth-1" role="none">
+               <a href="https://www.onixs.biz/sitemap.html" role="menuitem">
+                Sitemap
+               </a>
+              </li>
+             </ul>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="row">
+        <div class="col-12">
+         <p class="pb-1">
+          Copyright © 2025 OnixS. All Rights Reserved.
+         </p>
+        </div>
+       </div>
+      </div>
+     </footer>
+     <div class="hidden" id="consent-popup">
+      <div class="container">
+       <div class="row py-4">
+        <div class="col-12 col-md-8 col-lg-10 text-center text-md-left">
+         <p class="mb-0">
+          We track how people interact with our online web content and resources, and some of that tracking involves storing cookies on your device. By continuing to use our site you accept that you agree to this. For more details see our
+          <a href="https://www.onixs.biz/cookies-and-privacy.html">
+           Cookie usage, and Data Privacy and Protection Policies
+          </a>
+          .
+         </p>
+        </div>
+        <div class="col-12 col-md-3 col-lg-2 text-center text-md-right">
+         <p>
+          <a class="btn" href="#" id="accept">
+           Ok
+          </a>
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- /.wrapper -->
+    <div class="sidebar-offcanvas">
+     <div class="menu-offcanvas-container">
+      <!-- Offcanvas Navigation -->
+      <div class="sidebar-offcanvas">
+       <div class="menu-offcanvas-container bg-primary">
+        <div class="menu-upper">
+         <div class="row">
+          <div class="col">
+           <a class="offcanvas-brand" href="https://www.onixs.biz/" title="OnixS - homepage">
+            <span class="text-hide">
+             OnixS
+            </span>
+           </a>
+          </div>
+          <div class="col">
+           <button class="navbar-toggler" data-canvas="body" data-target="#myNavmenu" data-toggle="offcanvas" type="button">
+            <span class="sr-only">
+             Menu
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+           </button>
+          </div>
+         </div>
+         <div class="row">
+          <div class="col">
+           <nav class="navbar navbar-dark clearfix">
+            <div class="menu-main-menu-container">
+             <div class="row pt-3">
+              <div class="col-12 pb-4">
+               <div aria-label="Navigation Menu" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" data-menu-id="28091013952" data-sitemap-name="default" id="hs_menu_wrapper_module_157970791935981_" role="navigation">
+                <ul role="menu">
+                 <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none">
+                  <a aria-expanded="false" aria-haspopup="true" href="javascript:;" role="menuitem">
+                   Products
+                  </a>
+                  <ul class="hs-menu-children-wrapper" role="menu">
+                   <li class="hs-menu-item hs-menu-depth-2" role="none">
+                    <a href="https://www.onixs.biz/products.html" role="menuitem">
+                     Products Overview
+                    </a>
+                   </li>
+                   <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children" role="none">
+                    <a href="https://www.onixs.biz/directconnect.html" role="menuitem">
+                     directConnect
+                    </a>
+                    <ul class="hs-menu-children-wrapper" role="menu">
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/directconnect.html" role="menuitem">
+                       directConnect SDKs
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/bloomberg-tsox.html" role="menuitem">
+                       Bloomberg TSOX
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/cboe.html" role="menuitem">
+                       Cboe CFE
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/cboe-europe.html" role="menuitem">
+                       Cboe EU
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/cme.html" role="menuitem">
+                       CME Globex
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/cme-brokertec.html" role="menuitem">
+                       CME BrokerTec
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/cme-ebs.html" role="menuitem">
+                       CME EBS
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/deutsche-borse-regulatory-reporting-hub-fix.html" role="menuitem">
+                       Deutsche Börse RRH
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/ice-exchange.html" role="menuitem">
+                       ICE (Intercontinental Exchange)
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/lme.html" role="menuitem">
+                       LME (London Metals Exchange)
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/lse.html" role="menuitem">
+                       LSE (London Stock Exchange)
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/mts.html" role="menuitem">
+                       MTS Markets
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/nasdaq-nfi.html" role="menuitem">
+                       Nasdaq NFI
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/nodal-exchange-fix-trade-capture.html" role="menuitem">
+                       Nodal Exchange
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/tradecho.html" role="menuitem">
+                       TRADEcho
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/tt-7x.html" role="menuitem">
+                       TT® 7x FIX
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/tt.html" role="menuitem">
+                       TT® Platform
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/turquoise-dropcopy.html" role="menuitem">
+                       Turquoise
+                      </a>
+                     </li>
+                    </ul>
+                   </li>
+                   <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children" role="none">
+                    <a href="https://www.onixs.biz/fix-engine.html" role="menuitem">
+                     FIX Engine
+                    </a>
+                    <ul class="hs-menu-children-wrapper" role="menu">
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/fix-engine.html" role="menuitem">
+                       FIX Engine SDKs
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/net-fix-engine.html" role="menuitem">
+                       .NET Core/.NET FIX Engine
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/net-framework-fix-engine.html" role="menuitem">
+                       .NET Framework / C# FIX Engine
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/cpp-fix-engine.html" role="menuitem">
+                       C++ FIX Engine
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/java-fix-engine.html" role="menuitem">
+                       Java FIX Engine
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/fix-fast-decoder-encoder.html" role="menuitem">
+                       FIX FAST Decoder and Encoder
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/fix-fixml-converter.html" role="menuitem">
+                       FIX &lt;-&gt; FIXML Converter
+                      </a>
+                     </li>
+                    </ul>
+                   </li>
+                   <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children" role="none">
+                    <a href="https://www.onixs.biz/fix-protocol-dictionary-tools.html" role="menuitem">
+                     FIX Protocol Reference &amp; Tools
+                    </a>
+                    <ul class="hs-menu-children-wrapper" role="menu">
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/fix-protocol-dictionary-tools.html" role="menuitem">
+                       Reference &amp; Tools Overview
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/sbe-decoder-encoder.html" role="menuitem">
+                       SBE Decoder and Encoder
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/fix-protocol.html" role="menuitem">
+                       FIX Protocol Overview
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/fixp.html" role="menuitem">
+                       FIXP Overview
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/fix-dictionary.html" role="menuitem">
+                       FIX Dictionary
+                      </a>
+                     </li>
+                     <li class="hs-menu-item hs-menu-depth-3" role="none">
+                      <a href="https://www.onixs.biz/fix-analyser.html" role="menuitem">
+                       FIX Analyser
+                      </a>
+                     </li>
+                    </ul>
+                   </li>
+                  </ul>
+                 </li>
+                 <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="https://www.onixs.biz/about.html" role="menuitem">
+                   About OnixS
+                  </a>
+                 </li>
+                 <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="https://www.onixs.biz/insights" role="menuitem">
+                   Insights
+                  </a>
+                 </li>
+                 <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="https://www.onixs.biz/contact-us" role="menuitem">
+                   Contact us
+                  </a>
+                 </li>
+                </ul>
+               </div>
+              </div>
+             </div>
+            </div>
+           </nav>
+          </div>
+         </div>
+        </div>
+        <div class="menu-lower mt-auto">
+         <div class="row">
+          <div class="col">
+           <hr/>
+           <nav class="navbar navbar-dark clearfix">
+            <div class="menu-main-menu-container menu-main-menu-container-support">
+             <div class="row">
+              <div class="col-12 pb-4">
+               <div aria-label="Navigation Menu" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" data-menu-id="25865464974" data-sitemap-name="default" id="hs_menu_wrapper_module_157970791935981_" role="navigation">
+                <ul role="menu">
+                 <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="https://www.onixs.biz/support.html" role="menuitem">
+                   Support
+                  </a>
+                 </li>
+                </ul>
+               </div>
+              </div>
+             </div>
+            </div>
+           </nav>
+           <hr/>
+           <nav class="navbar navbar-dark clearfix">
+            <div class="menu-main-menu-container">
+             <div class="row">
+              <div class="col-12 pb-4">
+               <div aria-label="Navigation Menu" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" data-menu-id="25864979438" data-sitemap-name="default" id="hs_menu_wrapper_module_157970791935981_" role="navigation">
+                <ul role="menu">
+                 <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="https://www.onixs.biz/cookies-and-privacy.html" role="menuitem">
+                   Privacy
+                  </a>
+                 </li>
+                 <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="https://www.onixs.biz/sitemap.html" role="menuitem">
+                   Sitemap
+                  </a>
+                 </li>
+                </ul>
+               </div>
+              </div>
+             </div>
+            </div>
+           </nav>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- /.canvas -->
+  </div>
+  <!-- Full-screen search panel -->
+  <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_module_157970822025798" style="">
+   <div class="full-screen-search">
+    <div class="container">
+     <div class="row">
+      <div class="col-7 col-md-6 col-lg-4 align-self-start">
+       <!-- Branding and homepage link -->
+       <a class="navbar-brand d-inline-block" href="https://www.onixs.biz/" title="OnixS - homepage">
+        <span class="sr-only">
+         OnixS
+        </span>
+       </a>
+      </div>
+      <nav class="col-5 col-md-6 col-lg-8 text-right align-self-center">
+       <!-- Search -->
+       <button aria-label="Hide search" class="search-trigger d-inline-block">
+        <span class="text-hide">
+         Close Search
+        </span>
+       </button>
+      </nav>
+     </div>
+     <div class="row align-items-center search-container">
+      <div class="col-12 col-md-10 ml-md-auto mr-md-auto mb-5">
+       <h3 class="sr-only">
+        Search the site
+       </h3>
+       <form action="/hs-search-results" class="mb-5 searchbox" id="search-box" method="get" role="search">
+        <div class="row">
+         <div class="col-10 col-sm-10 col-md-10 col-xl-11">
+          <input aria-label="Search" autocomplete="off" class="searchbox-input" name="term" placeholder="Search" type="text"/>
+          <input name="type" type="hidden" value="SITE_PAGE"/>
+          <input name="type" type="hidden" value="BLOG_POST"/>
+          <input name="type" type="hidden" value="LISTING_PAGE"/>
+         </div>
+         <div class="col-2 col-sm-2 col-md-2 col-xl-1">
+          <button class="text-hide" form="search-box" type="submit">
+           Search
+          </button>
+         </div>
+        </div>
+       </form>
+       <!-- Google Custom Search Results -->
+       <span style="display:none;">
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script src="static/96379397a6447463061574d744d5334304c32707864575679655339716358566c636e6b744d5334784d5334794c6d707a.js">
+  </script>
+  <script src="static/86457567965533174615764795958526c4c3270786457567965533174615764795958526c4c5445754d6934784c6d707a.js">
+  </script>
+  <script>
+   hsjQuery = window['jQuery'];
+  </script>
+  <!-- HubSpot performance collection script -->
+  <script defer="" src="static/05a5735304c574e336469316c62574a6c5a43397a6447463061574d744d5334784d6a6b7a4c325674596d566b4c6d707a.js">
+  </script>
+  <script>
+   var hsVars = hsVars || {}; hsVars['language'] = 'en';
+  </script>
+  <script src="static/4615445346269397a6447463061574d744d5334314d7939696457356b6247567a4c3342796232706c59335175616e4d3d.js">
+  </script>
+  <script src="static/5623356306379397a6447463061574d744d5334784e7939696457356b6247567a4c3342796232706c59335175616e4d3d.js">
+  </script>
+  <script src="static/04d5455794e5451334f5455314d6939305a573177624746305a56396a59584a305832356c6479357461573475616e4d3d.js">
+  </script>
+  <script>
+   console.log('upper 1');
+    $(window).load(function() {
+
+        console.log('upper');
+        var OSValues = localStorage.getItem("finalValue");
+   
+        if(OSValues)
+        { 
+            var OSValues = OSValues.substring(1, OSValues.length-1);
+            // todo - code to update hidden field selection
+            //setTimeout(function(){  $("textarea[name='comments']").val(OSValues).change(); }, 2000);
+            var finalValue_cart= JSON.parse(localStorage.getItem("finalValue"));
+
+            $('#cartsize').html('');
+            if(finalValue_cart.length>0)
+            {
+                $('#cartsize').html(finalValue_cart.length);
+                $('#cartsize').show();
+                $('.header_cart_sec').show();
+                console.log('show');
+            }
+            else
+            {
+                $('#cartsize').hide();
+                $('.header_cart_sec').hide();
+                console.log('hide');
+            }
+        }
+        else
+        {
+            $('.header_cart_sec').hide();
+        }
+    });
+  </script>
+  <script src="static/66257396b6457786c5830396d5a6d4e68626e5a686331394f59585a705a324630615739754c6d31706269357163773d3d.js">
+  </script>
+  <script src="static/66257396b6457786c58314e6c59584a6a6146387458305a316247777455324e795a5756754c6d31706269357163773d3d.js">
+  </script>
+  <!-- Start of HubSpot Analytics Code -->
+  <script type="text/javascript">
+   var _hsq = _hsq || [];
+_hsq.push(["setContentType", "standard-page"]);
+_hsq.push(["setCanonicalUrl", "https:\/\/www.onixs.biz\/fix-dictionary\/4.2\/app_d.html"]);
+_hsq.push(["setPageId", "6010182884"]);
+_hsq.push(["setContentMetadata", {
+    "contentPageId": 6010182884,
+    "legacyPageId": "6010182884",
+    "contentFolderId": null,
+    "contentGroupId": null,
+    "abTestId": null,
+    "languageVariantId": 6010182884,
+    "languageCode": null,
+    
+    
+}]);
+  </script>
+  <script async="" defer="" id="hs-script-loader" src="static/559584a354c7a51754d69396f6379397a59334a70634852736232466b5a5849764d6a41314e4445334e69357163773d3d.js" type="text/javascript">
+  </script>
+  <!-- End of HubSpot Analytics Code -->
+  <script type="text/javascript">
+   var hsVars = {
+    render_id: "75cec5b3-e98a-4723-b3ce-0f595754626a",
+    ticks: 1751485686739,
+    page_id: 6010182884,
+    
+    content_group_id: 0,
+    portal_id: 2054176,
+    app_hs_base_url: "https://app.hubspot.com",
+    cp_hs_base_url: "https://cp.hubspot.com",
+    language: "en",
+    analytics_page_type: "standard-page",
+    scp_content_type: "",
+    
+    analytics_page_id: "6010182884",
+    category_id: 1,
+    folder_id: 0,
+    is_hubspot_user: false
+}
+  </script>
+  <script defer="" src="static/05647397662484e4e5a5735314c334e3059585270597930784c6a517a4d69397163793970626d526c6543357163773d3d.js">
+  </script>
+  <!-- es6 polyfill -->
+  <script src="static/0596e4d765a584d324c584e6f615730764d43347a4e53347a4c32567a4e69317a61476c744c6d31706269357163773d3d.js">
+  </script>
+  <!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com -->
+  <script>
+   (function(d,u,ac){var s=d.createElement('script');s.type='text/javascript';s.src='https://a.omappapi.com/app/js/api.min.js';s.async=true;s.dataset.user=u;s.dataset.account=ac;d.getElementsByTagName('head')[0].appendChild(s);})(document,160973,174895);
+  </script>
+  <!-- / OptinMonster -->
+  <!-- Bootstrap v4.3.1 JS -->
+  <!--     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> -->
+  <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" src="static/663473977634756794c6d707a4c7a45754d5451754e7939316257517663473977634756794c6d31706269357163773d3d.js">
+  </script>
+  <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="static/96232393063335279595841764e43347a4c6a4576616e4d76596d397664484e30636d46774c6d31706269357163773d3d.js">
+  </script>
+  <!-- Custom JS -->
+  <script src="static/a4f5467764d5463304d5455794e5451334f54457a4f4339305a573177624746305a5639686348417562576c754c6d707a.js">
+  </script>
+ </body>
+</html>
